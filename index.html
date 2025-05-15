@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kidstar-reward</title>
+    <script src="app.js" defer></script>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Link to FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="bg-yellow-50">
+
+    <div class="container mx-auto mt-10 flex flex-col items-center justify-center min-h-screen">
+        <!-- Child's name displayed as the main title -->
+        <div id="childNameDisplay" class="text-center text-4xl font-bold text-pink-600 mt-4"></div>
+
+        <!-- Star Display -->
+        <div class="mt-10 text-center">
+            <!-- Large Stars -->
+            <div id="bigStars" class="text-yellow-500 big-star"></div>
+
+            <!-- Small Stars -->
+            <div id="starDisplay" class="mt-2 text-yellow-400 small-star">⭐️</div>
+
+            <!-- Total Star Count -->
+            <p class="text-pink-500 text-lg font-semibold mt-2">Total: <span id="totalStars">0</span></p>
+        </div>
+
+        <!-- Buttons aligned below -->
+        <div class="flex justify-center space-x-6 mt-8">
+            <button onclick="requestPasswordThen('settings')" class="icon-button" title="Settings">
+                <i class="fas fa-cog"></i>
+            </button>
+            <button onclick="requestPasswordThen('star')" class="icon-button" title="Add Star">
+                <i class="fas fa-star"></i>
+            </button>
+            <button onclick="requestPasswordThen('log')" class="icon-button" title="View History">
+                <i class="fas fa-list"></i>
+            </button>
+        </div>
+
+        <!-- Password Popup -->
+        <div id="passwordPopup" class="popup-overlay">
+            <div class="popup-content">
+                <h2 class="text-xl font-semibold text-gray-800">Enter Password (default: 123)</h2>
+                <input type="password" id="passwordInput" class="mt-1 block w-full border-pink-300 rounded-md shadow-sm" placeholder="Enter password">
+                <div class="mt-6">
+                    <button onclick="verifyPassword()" class="bg-green-500 text-white px-4 py-2 rounded-lg">
+                        <i class="fas fa-check"></i> Confirm
+                    </button>
+                    <button onclick="closePasswordPopup()" class="ml-2 bg-red-500 text-white px-4 py-2 rounded-lg">
+                        <i class="fas fa-times"></i> Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Popup (Child Name and Password) -->
+        <div id="settingsPopup" class="popup-overlay">
+            <div class="popup-content">
+                <h2 class="text-xl font-semibold text-gray-800">Set Child Name & Password</h2>
+
+                <!-- Child's Name -->
+                <div>
+                    <label for="childNameSetting" class="block text-sm font-medium text-gray-700">Child Name:</label>
+                    <input type="text" id="childNameSetting" class="mt-1 block w-full border-pink-300 rounded-md shadow-sm" placeholder="Enter child's name">
+                </div>
+
+                <!-- Password -->
+                <div class="mt-4">
+                    <label for="passwordSetting" class="block text-sm font-medium text-gray-700">Password:</label>
+                    <input type="password" id="passwordSetting" class="mt-1 block w-full border-pink-300 rounded-md shadow-sm" placeholder="Set password">
+                </div>
+
+                <!-- Save Button -->
+                <div class="mt-6">
+                    <button onclick="saveSettings()" class="bg-green-500 text-white px-4 py-2 rounded-lg">
+                        <i class="fas fa-save"></i> Save
+                    </button>
+                    <button onclick="closeSettingsPopup()" class="ml-2 bg-red-500 text-white px-4 py-2 rounded-lg">
+                        <i class="fas fa-times"></i> Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add Star Popup (Select Activity and Star Count) -->
+        <div id="starPopup" class="popup-overlay">
+            <div class="popup-content">
+                <h2 class="text-xl font-semibold text-gray-800">Select Activity</h2>
+
+                <!-- Good Activity Selection -->
+                <div class="mt-4">
+                    <label for="activity" class="block text-sm font-medium text-gray-700">Select Good Activity:</label>
+                    <select id="activity" class="mt-1 block w-full border-pink-300 rounded-md shadow-sm" onchange="setStarForActivity()">
+                        <option value="1">Cleaned the room (1 star)</option>
+                        <option value="2">Helped parents (2 stars)</option>
+                        <option value="3">Shared toys with friends (3 stars)</option>
+                        <option value="custom">Custom Activity</option>
+                    </select>
+                </div>
+
+                <!-- Custom Activity Input and Star Count -->
+                <div id="customActivitySection" class="mt-4 hidden">
+                    <label for="customActivity" class="block text-sm font-medium text-gray-700">Custom Activity:</label>
+                    <input type="text" id="customActivity" class="mt-1 block w-full border-pink-300 rounded-md shadow-sm" placeholder="Enter custom activity">
+                    
+                    <label for="customStars" class="block text-sm font-medium text-gray-700 mt-2">Star Count:</label>
+                    <input type="number" id="customStars" class="mt-1 block w-full border-pink-300 rounded-md shadow-sm" placeholder="Enter number of stars">
+                </div>
+
+                <!-- Add Star Button -->
+                <div class="mt-6">
+                    <button onclick="confirmStar()" class="bg-blue-500 text-white px-4 py-2 rounded-lg">
+                        <i class="fas fa-star"></i> Add Star
+                    </button>
+                    <button onclick="closeStarPopup()" class="ml-2 bg-red-500 text-white px-4 py-2 rounded-lg">
+                        <i class="fas fa-times"></i> Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Activity History Popup -->
+        <div id="logPopup" class="popup-overlay">
+            <div class="popup-content">
+                <h2 class="text-xl font-semibold text-gray-800">Activity History</h2>
+                <ul id="activityLog" class="list-disc pl-5 mt-2 text-gray-700">
+                    <!-- Activity log entries will be added here -->
+                </ul>
+                <button onclick="closeLogPopup()" class="mt-4 bg-red-500 text-white px-4 py-2 rounded-lg">
+                    <i class="fas fa-times"></i> Close
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
