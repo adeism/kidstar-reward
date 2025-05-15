@@ -1,0 +1,155 @@
+/* General body styling */
+body {
+    background-color: #f8f9fa; /* Soft light background */
+    font-family: 'Poppins', sans-serif; /* Formal yet friendly font */
+}
+
+/* Title Styling (Child's Name) */
+#childNameDisplay {
+    color: #0D92F4; /* Primary Blue */
+    font-size: 2.5rem;
+    font-weight: 600; /* Slightly bold */
+    margin-bottom: 1rem;
+}
+
+/* Star Styling */
+.big-star {
+    font-size: 6rem;
+    color: #77CDFF; /* Light Blue for the large stars */
+}
+
+.small-star {
+    font-size: 3rem;
+    color: #0D92F4; /* Primary Blue for small stars */
+}
+
+/* Buttons (Rounded, modern, with soft shadows) */
+.icon-button {
+    background-color: #0D92F4; /* Primary Blue for buttons */
+    color: #fff;
+    font-size: 1.8rem;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
+}
+
+/* Button hover effect */
+.icon-button:hover {
+    background-color: #007ACC; /* Slightly darker blue on hover */
+    transform: scale(1.1); /* Scale up slightly on hover */
+}
+
+/* Tooltip styling (on button hover) */
+.icon-button:hover::after {
+    content: attr(title);
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #343a40;
+    color: #fff;
+    font-size: 0.85rem;
+    padding: 4px 8px;
+    border-radius: 5px;
+    white-space: nowrap;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Popup styling with soft colors */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.popup-content {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 12px; /* Soft rounded corners */
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    border: 3px solid #0D92F4; /* Blue border for consistency */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Input Fields */
+input, select {
+    font-family: 'Poppins', sans-serif;
+    padding: 10px;
+    border: 2px solid #ced4da; /* Light border */
+    border-radius: 6px;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 1rem;
+    color: #495057;
+    margin-top: 8px;
+    background-color: #f8f9fa;
+}
+
+/* Save/Cancel Buttons in Popups */
+button {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    padding: 10px 20px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button.bg-green-500 {
+    background-color: #0D92F4; /* Primary Blue */
+    color: white;
+}
+
+button.bg-green-500:hover {
+    background-color: #007ACC; /* Darker blue on hover */
+}
+
+button.bg-red-500 {
+    background-color: #F95454; /* Primary Red */
+    color: white;
+}
+
+button.bg-red-500:hover {
+    background-color: #C62E2E; /* Darker red on hover */
+}
+
+/* Total Stars Styling */
+#totalStars {
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: #0D92F4; /* Primary Blue */
+    display: inline-block;
+    margin-left: 8px;
+}
+
+/* Activity Log Styling */
+#activityLog {
+    font-size: 1rem;
+    color: #343a40; /* Dark gray for readability */
+}
+
+/* Center container layout */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
